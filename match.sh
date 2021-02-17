@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Find matching lines in file
-LINES=$(grep "$1" -i ./timestamps.txt);
+LINES=$(grep "$1" -i ${BASH_SOURCE%/*}/timestamps.txt);
 
 echo $LINES
 # If no matches, quit with warning
@@ -17,4 +17,4 @@ echo "Loading first match in browser..."
 TIMESTAMP=$(echo $LINES | sed 's/ .*//');
 
 # Open video in browser at timestamp
-node index.js $TIMESTAMP;
+node ${BASH_SOURCE%/*}/index.js $TIMESTAMP;
