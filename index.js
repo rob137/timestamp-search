@@ -1,3 +1,5 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import puppeteer from 'puppeteer';
 
 function convertTimeStamp(timestamp) {
@@ -21,7 +23,10 @@ async function main() {
     defaultViewport: null,
   });
   const page = await browser.newPage('');
-  await page.goto('file:///Users/robert.kirby/central-intro-video/video.mp4');
+
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  await page.goto(`file://${__dirname}/video.mp4`);
+
   closeFirstTab(browser);
 
   await page.evaluate(convertTimeStamp, process.argv[2]);
