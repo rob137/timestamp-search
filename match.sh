@@ -3,7 +3,6 @@
 # Find matching lines in file
 LINES=$(grep "$1" -i ${BASH_SOURCE%/*}/timestamps.txt);
 
-echo $LINES
 # If no matches, quit with warning
 if [ -z "$LINES" ]
 then
@@ -12,7 +11,10 @@ then
 fi
 
 
-echo "Total matches found: $(wc -l <<< $LINES)"
+echo "$(wc -l <<< "$LINES") matches found:"
+
+printf "\n$LINES\n\n"
+
 echo "Loading first match in browser..."
 TIMESTAMP=$(echo $LINES | sed 's/ .*//');
 
